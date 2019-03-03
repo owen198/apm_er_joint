@@ -15,4 +15,4 @@ header = {
         "Authorization": "Bearer " + resp.json()['accessToken']
 }
 resp = requests.get("https://api-afs-develop.iii-cflab.com/v2/instances", headers=header)
-print(resp2.json())
+print(resp.json())
