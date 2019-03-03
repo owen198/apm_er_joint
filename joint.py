@@ -1,20 +1,18 @@
 
 
 import requests
+import os
 
-url = "https://portal-sso-develop.iii-cflab.com/v2.0/auth/native"
 payload = {
-        'username': "dev@gmail.com",
-        'password': "password"
+        'username': os.environ['USERNAME'],
+        'password': os.environ['PASSWORD']
 }
+resp = requests.post('https://portal-sso-develop.iii-cflab.com/v2.0/auth/native', json=payload)
 
-resp = requests.post(url, json=payload)
 
-
-header2 = {
+header = {
         "content-type": "application/json",
         "Authorization": "Bearer " + resp.json()['accessToken']
 }
-
-resp2 = requests.get("https://api-afs-develop.iii-cflab.com/v2/instances", headers=header2)
+resp = requests.get("https://api-afs-develop.iii-cflab.com/v2/instances", headers=header)
 print(resp2.json())
