@@ -22,3 +22,24 @@ resp = requests.get('https://' + ENDPOINT_AFS + '.' + WISE_PAAS_INSTANCE + '/v2/
                     headers=header,
                     verify=False)
 print(resp.json())
+
+
+ENDPOINT_APM = 'api-apm-acniotsense-apmdemo'
+APM_HIST = 'https://' + ENDPOINT_APM + '.' + WISE_PAAS_INSTANCE + '/hist/raw/data'
+
+payload = dict()
+payload['nodeId'] = '272'
+payload['sensorType'] = 'monitor'
+payload['sensorName'] = 'cnc_predict'
+payload['startTs'] = '2018-12-29T00:36:18.000Z'
+payload['endTs'] = '2018-12-30T00:36:58.000Z'
+
+header = dict()
+header['content-type'] = 'application/json'
+header['Authorization'] = 'Bearer ' + resp.json()['accessToken']
+
+r = requests.get(APM_HIST, 
+                 params=payload, 
+                 headers=header,
+                 verify=False)
+print(r.url)
